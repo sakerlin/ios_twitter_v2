@@ -13,6 +13,10 @@
 @property (nonatomic, strong) NSString *text;
 @property (nonatomic, strong) NSDate *createdAt;
 @property (nonatomic, strong) User *user;
+@property (nonatomic, strong) NSString *profile_image_url;
+@property (nonatomic, strong) NSString *screen_name;
+@property (nonatomic, strong) NSString *name;
+ 
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 + (NSArray *)tweetsWithArray:(NSArray *)dictionaries;

@@ -16,20 +16,16 @@
             self.user = [[User alloc] initWithDictionary:dictionary[@"user"]];
             self.text = dictionary[@"text"];
             NSString *createdAtString = dictionary[@"created_at"];
+            self.profile_image_url = self.user.profileImageUrl;
+            self.screen_name = self.user.screen_name;
+            self.name = self.user.name;
+            NSLog(@"screen_name%@",self.screen_name);
             NSDateFormatter *formater = [[NSDateFormatter alloc] init];
             formater.dateFormat = @"EEE MMM d HH:mm:ss Z y";
-           // [formater setTimeZone:[NSTimeZone systemTimeZone]];
-           // [formater setLocale:[NSLocale currentLocale]];
-            //[formater setLocale:[NSLocale systemLocale]];
-            //[formater setDateFormat:@"EEE MMM d HH:mm:ss Z y 'at' h:mm:ss a zzzz"];
-            //[formater setFormatterBehavior:NSDateFormatterBehaviorDefault];
-             //[formater setDateFormat:@"EEE MMM d HH:mm:ss Z y"];
+          
             [formater setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
             self.createdAt = [formater dateFromString:createdAtString];
-            //NSLog(@"createdAtString=%@",createdAtString);
-            //NSLog(@"createdAt=%@", self.createdAt );
-            
-            /*
+           /*
             self.favoriteCount = [dictionary[@"favorite_count"] integerValue];
             
             self.favorited = [dictionary[@"favorited"] boolValue];

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TweetsCell" rowHeight="86" id="KGk-i7-Jjw" customClass="TweetsCell">
+            <rect key="frame" x="0.0" y="0.0" width="382" height="86"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="410" height="177"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DIY-cg-cqa">
+                        <rect key="frame" x="8" y="8" width="70" height="70"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="70" id="CQ5-ty-EhZ"/>
+                            <constraint firstAttribute="height" constant="70" id="cW4-jR-DeV"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="布萊恩" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nwA-R9-TPl">
+                        <rect key="frame" x="86" y="8" width="51" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@brian" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="brF-1L-aJ7">
+                        <rect key="frame" x="142" y="8" width="53" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="A28-wP-0nU"/>
+                            <constraint firstAttribute="width" constant="53" id="IxU-K4-S0F"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3時" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m0r-T5-Qd7">
+                        <rect key="frame" x="347" y="8" width="27" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="「PTT 鄉民懶人包」免登入幫懶惰的你劃好重點！（iPhone, Android）" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ff-xt-GxL">
+                        <rect key="frame" x="86" y="34" width="291" height="41"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="brF-1L-aJ7" firstAttribute="bottom" secondItem="nwA-R9-TPl" secondAttribute="bottom" id="2Gw-5f-MMh"/>
+                    <constraint firstItem="7Ff-xt-GxL" firstAttribute="top" secondItem="m0r-T5-Qd7" secondAttribute="bottom" constant="5" id="9Bq-Jf-0tL"/>
+                    <constraint firstItem="nwA-R9-TPl" firstAttribute="leading" secondItem="DIY-cg-cqa" secondAttribute="trailing" constant="8" id="9NH-9h-2Ye"/>
+                    <constraint firstItem="brF-1L-aJ7" firstAttribute="top" secondItem="nwA-R9-TPl" secondAttribute="top" id="AjC-df-Q5R"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="7Ff-xt-GxL" secondAttribute="bottom" constant="8" id="C1G-Ge-agK"/>
+                    <constraint firstItem="7Ff-xt-GxL" firstAttribute="top" secondItem="nwA-R9-TPl" secondAttribute="bottom" constant="5" id="KuN-Od-3gB"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="DIY-cg-cqa" secondAttribute="bottom" constant="8" id="Luy-Me-uQ7"/>
+                    <constraint firstItem="DIY-cg-cqa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="PFl-Yi-pWr"/>
+                    <constraint firstItem="m0r-T5-Qd7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="RGh-Zd-VEJ"/>
+                    <constraint firstAttribute="trailing" secondItem="m0r-T5-Qd7" secondAttribute="trailing" constant="8" id="Rdb-HR-Ljv"/>
+                    <constraint firstAttribute="trailing" secondItem="7Ff-xt-GxL" secondAttribute="trailing" constant="5" id="UsL-Ap-ufk"/>
+                    <constraint firstItem="7Ff-xt-GxL" firstAttribute="leading" secondItem="DIY-cg-cqa" secondAttribute="trailing" constant="8" id="YT4-Vy-Qwj"/>
+                    <constraint firstItem="nwA-R9-TPl" firstAttribute="centerY" secondItem="m0r-T5-Qd7" secondAttribute="centerY" id="Zu0-yQ-Vuh"/>
+                    <constraint firstItem="nwA-R9-TPl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="nGP-Gy-dXq"/>
+                    <constraint firstItem="DIY-cg-cqa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="oBM-e5-dNb"/>
+                    <constraint firstItem="brF-1L-aJ7" firstAttribute="leading" secondItem="nwA-R9-TPl" secondAttribute="trailing" constant="5" id="oli-bA-PLe"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="author" destination="brF-1L-aJ7" id="tf5-8l-Xeq"/>
+                <outlet property="authorImageView" destination="DIY-cg-cqa" id="jcV-ce-8QY"/>
+                <outlet property="nickName" destination="nwA-R9-TPl" id="bVq-gO-8xI"/>
+                <outlet property="text" destination="7Ff-xt-GxL" id="kFr-2Y-FNf"/>
+                <outlet property="timeStamp" destination="m0r-T5-Qd7" id="4nX-68-ZCY"/>
+            </connections>
+            <point key="canvasLocation" x="545" y="337"/>
+        </tableViewCell>
+    </objects>
+</document>

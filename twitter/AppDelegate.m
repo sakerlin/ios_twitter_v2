@@ -28,7 +28,7 @@
         //ContainerViewController *cvc = [[ContainerViewController alloc] init];
         //UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:cvc];
         self.window.rootViewController = [[TweetsViewController alloc] init];
-        NSLog(@"welcome %@", user.name);
+        //NSLog(@"welcome %@", user.name);
     } else {
         //LoginViewController *lvc = [[LoginViewController alloc] init];
         //self.window.rootViewController = lvc;
