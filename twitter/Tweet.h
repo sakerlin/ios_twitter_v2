@@ -16,7 +16,8 @@
 @property (nonatomic, strong) NSString *profile_image_url;
 @property (nonatomic, strong) NSString *screen_name;
 @property (nonatomic, strong) NSString *name;
- 
+@property (nonatomic, strong) NSString *tweetPhotoUrl;
+@property (nonatomic, strong) NSMutableArray *tweetPhotoUrls;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 + (NSArray *)tweetsWithArray:(NSArray *)dictionaries;

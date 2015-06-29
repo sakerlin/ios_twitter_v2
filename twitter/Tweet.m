@@ -25,20 +25,6 @@
           
             [formater setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
             self.createdAt = [formater dateFromString:createdAtString];
-           /*
-            self.favoriteCount = [dictionary[@"favorite_count"] integerValue];
-            
-            self.favorited = [dictionary[@"favorited"] boolValue];
-            self.tweetId = dictionary[@"id_str"];
-            self.retweetCount = [dictionary[@"retweet_count"] integerValue];
-            self.retweeted = [dictionary[@"retweeted"] boolValue];
-            NSDictionary *childTweetDictionary = dictionary[@"retweeted_status"];
-            if (childTweetDictionary != nil) {
-                self.childTweet = [[Tweet alloc] initWithDictionary:childTweetDictionary];
-            } else {
-                self.childTweet = nil;
-            }
-            
             self.tweetPhotoUrl = nil;
             self.tweetPhotoUrls = [NSMutableArray array];
             NSArray *mediaArray = [dictionary valueForKeyPath:@"extended_entities.media"];
@@ -53,6 +39,21 @@
                     }
                 }
             }
+           /*
+            self.favoriteCount = [dictionary[@"favorite_count"] integerValue];
+            
+            self.favorited = [dictionary[@"favorited"] boolValue];
+            self.tweetId = dictionary[@"id_str"];
+            self.retweetCount = [dictionary[@"retweet_count"] integerValue];
+            self.retweeted = [dictionary[@"retweeted"] boolValue];
+            NSDictionary *childTweetDictionary = dictionary[@"retweeted_status"];
+            if (childTweetDictionary != nil) {
+                self.childTweet = [[Tweet alloc] initWithDictionary:childTweetDictionary];
+            } else {
+                self.childTweet = nil;
+            }
+            
+            
              */
         }
         return self;

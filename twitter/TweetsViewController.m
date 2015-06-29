@@ -29,10 +29,11 @@
         [self.tableView reloadData];
     }];
     [self.tableView registerNib:[UINib nibWithNibName:@"TweetsCell" bundle:nil] forCellReuseIdentifier:@"TweetsCell"];
-    self.tableView.estimatedRowHeight = 86;
+    self.tableView.estimatedRowHeight = 94;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
 }
 
 - (void)didReceiveMemoryWarning {
