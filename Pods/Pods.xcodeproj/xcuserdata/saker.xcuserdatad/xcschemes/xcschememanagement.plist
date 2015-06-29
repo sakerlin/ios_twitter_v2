@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-SVProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -27,22 +32,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>6D6A35D2F24FDD5BA62D5486</key>
+		<key>259665C78BC69D20BAD4DBE2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9EC97CCCFE8726E15532020C</key>
+		<key>2B7BD7937C947381F8EE7163</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A79CC864661952A9F3D01AE5</key>
+		<key>B24035DBAA158B47E54B138D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DE21B9EEBE4EB9F735565FCB</key>
+		<key>F7CF914ABAA7A17AB5314F59</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FFC8F2E8C28B721CDFBFBBB1</key>
 		<dict>
 			<key>primary</key>
 			<true/>

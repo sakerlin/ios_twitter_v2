@@ -39,11 +39,12 @@
                     }
                 }
             }
+            self.tweetId = dictionary[@"id_str"];
            /*
             self.favoriteCount = [dictionary[@"favorite_count"] integerValue];
             
             self.favorited = [dictionary[@"favorited"] boolValue];
-            self.tweetId = dictionary[@"id_str"];
+            
             self.retweetCount = [dictionary[@"retweet_count"] integerValue];
             self.retweeted = [dictionary[@"retweeted"] boolValue];
             NSDictionary *childTweetDictionary = dictionary[@"retweeted_status"];

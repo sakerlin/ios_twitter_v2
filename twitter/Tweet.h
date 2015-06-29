@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *tweetPhotoUrl;
 @property (nonatomic, strong) NSMutableArray *tweetPhotoUrls;
+@property (nonatomic, strong) NSString *tweetId;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 + (NSArray *)tweetsWithArray:(NSArray *)dictionaries;
