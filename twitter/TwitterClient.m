@@ -25,7 +25,6 @@ NSString * const kTwitterBaseUrl = @"https://api.twitter.com";
 + (TwitterClient *)sharedInstance {
     static TwitterClient *instance = nil;
     
-    // Use dispatch_once to make sure the block inside is thread safe.
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         if (instance == nil) {
@@ -37,7 +36,6 @@ NSString * const kTwitterBaseUrl = @"https://api.twitter.com";
 }
 - (void)loginWithCompletion:(void (^)(User *user, NSError *error))completion {
     self.loginCompletion = completion;
-    // To clear your previous login state
     [self.requestSerializer removeAccessToken];
     [self fetchRequestTokenWithPath:@"oauth/request_token" method:@"GET" callbackURL:[NSURL URLWithString:@"cptwitterdemo://oauth"] scope:nil success:^(BDBOAuthToken *requestToken) {
         NSURL *authUrl = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.twitter.com/oauth/authorize?oauth_token=%@", requestToken.token]];
@@ -48,11 +46,10 @@ NSString * const kTwitterBaseUrl = @"https://api.twitter.com";
     }];
 }
 - (void)openURL:(NSURL *)url {
-    // third step to get the access token
+    
     [self fetchAccessTokenWithPath:@"oauth/access_token" method:@"POST" requestToken:[BDBOAuthToken tokenWithQueryString:url.query] success:^(BDBOAuthToken *accessToken) {
         [self.requestSerializer saveAccessToken:accessToken];
         
-        // Get current user info
         [self GET:@"1.1/account/verify_credentials.json" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             User *user = [[User alloc] initWithDictionary:responseObject];
             /*
@@ -84,5 +81,33 @@ NSString * const kTwitterBaseUrl = @"https://api.twitter.com";
         NSLog(@"Failed to get tweets with error %@", error);
         completion(nil, error);
     }];
+}
+
+
+- (void)doFavorite:(NSString *)tweetId completion:(void (^)(NSError *error))completion {
+    [self POST:[NSString stringWithFormat:@"1.1/favorites/create.json?id=%@", tweetId]
+    parameters:@{@"id": tweetId}
+       success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"favorite success");
+       }
+       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+           NSLog(@"Fav Fail, %@", error);
+       }];
+    
+}
+
+
+
+
+- (void)doUnFavorite:(NSString *)tweetId completion:(void (^)(NSError *error))completion {
+    [self POST:[NSString stringWithFormat:@"1.1/favorites/destroy.json?id=%@", tweetId]
+    parameters:@{@"id": tweetId}
+       success:^(AFHTTPRequestOperation *operation, id responseObject) {
+           NSLog(@"unfavorite success");
+       }
+       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+           NSLog(@"unFav Fail, %@", error);
+       }];
+    
 }
 @end

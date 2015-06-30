@@ -19,7 +19,10 @@
 @property (nonatomic, strong) NSString *tweetPhotoUrl;
 @property (nonatomic, strong) NSMutableArray *tweetPhotoUrls;
 @property (nonatomic, strong) NSString *tweetId;
-
+@property (nonatomic, assign) NSInteger favCount;
+@property (nonatomic, assign) NSInteger retweetCount;
+@property (nonatomic, assign) BOOL favorited;
+@property (nonatomic, assign) BOOL retweeted;
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 + (NSArray *)tweetsWithArray:(NSArray *)dictionaries;
 @end

@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TweetsViewController">
             <connections>
                 <outlet property="tableView" destination="f2e-Ut-zm6" id="nlj-6V-AYb"/>
+                <outlet property="tweetNav" destination="6LV-h6-bm7" id="f2r-dT-QNy"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -15,27 +16,51 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7rr-40-DK6" customClass="Tweets">
-                    <rect key="frame" x="127" y="182" width="49" height="30"/>
-                    <state key="normal" title="Logout">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onLogout:" destination="-1" eventType="touchUpInside" id="HYU-VE-kTZ"/>
-                    </connections>
-                </button>
+                <navigationBar contentMode="scaleToFill" restorationIdentifier="tweetNav" translatesAutoresizingMaskIntoConstraints="NO" id="6LV-h6-bm7">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="75"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="75" id="YZR-KX-FuK"/>
+                    </constraints>
+                    <items>
+                        <navigationItem title="Twitter" id="aKg-HI-i8J">
+                            <barButtonItem key="leftBarButtonItem" id="bEZ-Cc-fck">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7rr-40-DK6" customClass="Tweets">
+                                    <rect key="frame" x="127" y="182" width="49" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" title="Logout">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="onLogout:" destination="-1" eventType="touchUpInside" id="HYU-VE-kTZ"/>
+                                    </connections>
+                                </button>
+                            </barButtonItem>
+                        </navigationItem>
+                    </items>
+                </navigationBar>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="f2e-Ut-zm6">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <rect key="frame" x="0.0" y="75" width="600" height="525"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="f2e-Ut-zm6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="26v-Aw-0Pv"/>
+                <constraint firstAttribute="trailing" secondItem="6LV-h6-bm7" secondAttribute="trailing" id="2ZN-Uk-8Ng"/>
                 <constraint firstAttribute="trailing" secondItem="f2e-Ut-zm6" secondAttribute="trailing" id="BsR-sY-yzT"/>
+                <constraint firstItem="6LV-h6-bm7" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="N4b-x4-1gu"/>
                 <constraint firstAttribute="bottom" secondItem="f2e-Ut-zm6" secondAttribute="bottom" id="QV6-YP-6bg"/>
+                <constraint firstItem="f2e-Ut-zm6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="aLy-HA-Mkg"/>
+                <constraint firstItem="6LV-h6-bm7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="iP1-fh-jE9"/>
+                <constraint firstItem="f2e-Ut-zm6" firstAttribute="top" secondItem="6LV-h6-bm7" secondAttribute="bottom" id="ohv-Ay-5bo"/>
                 <constraint firstItem="f2e-Ut-zm6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="r0c-3s-9rK"/>
             </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="26v-Aw-0Pv"/>
+                    <exclude reference="aLy-HA-Mkg"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="260" y="419"/>
         </view>
     </objects>

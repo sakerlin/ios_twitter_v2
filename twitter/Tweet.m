@@ -19,7 +19,7 @@
             self.profile_image_url = self.user.profileImageUrl;
             self.screen_name = self.user.screen_name;
             self.name = self.user.name;
-            NSLog(@"screen_name%@",self.screen_name);
+            //NSLog(@"screen_name%@",self.screen_name);
             NSDateFormatter *formater = [[NSDateFormatter alloc] init];
             formater.dateFormat = @"EEE MMM d HH:mm:ss Z y";
           
@@ -40,13 +40,12 @@
                 }
             }
             self.tweetId = dictionary[@"id_str"];
-           /*
-            self.favoriteCount = [dictionary[@"favorite_count"] integerValue];
-            
-            self.favorited = [dictionary[@"favorited"] boolValue];
-            
+            self.favCount = [dictionary[@"favorite_count"] integerValue];
             self.retweetCount = [dictionary[@"retweet_count"] integerValue];
+            self.favorited = [dictionary[@"favorited"] boolValue];
             self.retweeted = [dictionary[@"retweeted"] boolValue];
+            /*
+             
             NSDictionary *childTweetDictionary = dictionary[@"retweeted_status"];
             if (childTweetDictionary != nil) {
                 self.childTweet = [[Tweet alloc] initWithDictionary:childTweetDictionary];

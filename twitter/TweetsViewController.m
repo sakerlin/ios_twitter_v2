@@ -21,6 +21,7 @@
 @property (nonatomic, assign) BOOL isInfiniteLoading;
 @property (nonatomic, assign) BOOL isInitLoading;
 @property (nonatomic, assign) BOOL isPullDownRefreshing;
+@property (weak, nonatomic) IBOutlet UINavigationBar *tweetNav;
 
 @property (nonatomic, assign) BOOL isLoadingOnTheFly;
 
@@ -31,6 +32,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+          
+  
     [self getHomeTimeline:nil];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"TweetsCell" bundle:nil] forCellReuseIdentifier:@"TweetsCell"];
@@ -39,7 +42,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    //pull to refesh
+     //pull to refesh
     self.tableRefreshControl = [[UIRefreshControl alloc] init];
     [self.tableRefreshControl addTarget:self action:@selector(onPulltofresh) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.tableRefreshControl atIndex:0];
@@ -61,9 +64,13 @@
     self.isInfiniteLoading = NO;
 
 }
-
+// Pull down support
+- (void)onLogoutButton {
+   [User logout];
+}
 // Pull down support
 - (void)onPulltofresh {
+    self.isPullDownRefreshing = YES;
     [self getHomeTimeline:nil];
 }
 - (void)getHomeTimeline:(NSMutableDictionary *)params{
@@ -94,7 +101,6 @@
                 self.isInitLoading = NO;
                 //[self loadCompletionAnimation];
             }
-            
             
             [self.tableView reloadData];
         } else {
@@ -135,6 +141,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TweetsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetsCell"];
     cell.tweet = self.tweets[(NSUInteger) indexPath.row];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     // Infinite loading
     if (indexPath.row == self.tweets.count - 1 && self.lastTweetsCount == 20 && !self.isLoadingOnTheFly) {
         NSMutableDictionary *params = [NSMutableDictionary dictionary];

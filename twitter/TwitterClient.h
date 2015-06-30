@@ -13,5 +13,6 @@
 - (void)loginWithCompletion:(void (^)(User *user, NSError *error))completion;
 - (void)openURL:(NSURL *)url;
 - (void)homeTimelineWithParams:(NSDictionary *)params completion:(void (^)(NSArray *tweets, NSError *error))completion;
-
+- (void)doFavorite:(NSString *)tweetId completion:(void (^)(NSError *error))completion;
+- (void)doUnFavorite:(NSString *)tweetId completion:(void (^)(NSError *error))completion;
 @end
