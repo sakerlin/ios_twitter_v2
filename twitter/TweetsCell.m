@@ -10,6 +10,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "NSDate+DateTools.h"
 #import "TwitterClient.h"
+#import "ComposeViewController.h"
 @interface TweetsCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *authorImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nickName;
@@ -29,15 +30,36 @@
 @end
 
 @implementation TweetsCell
+- (IBAction)onReply:(id)sender {
+    NSLog(@"on reply");
+    NSLog(@"%@", self.tweet);
+    [self.delegate TweetsCell:self onReplyClick:self.tweet];
+}
+- (IBAction)onRetweet:(id)sender {
+    NSLog(self.tweet.retweeted ? @"YES" :@"NO");
+    if(self.tweet.retweeted){
+       // [self.retweetButton setImage:[UIImage imageNamed:@"retweet"] forState:UIControlStateNormal];
+       // self.tweet.retweeted = NO;
+        //self.tweet.retweetCount --;
+       // [[TwitterClient sharedInstance] doUnRetweet:self.tweet.tweetId completion:nil];
+    } else {
+        [self.retweetButton setImage:[UIImage imageNamed:@"retweeted"] forState:UIControlStateNormal];
+        self.tweet.retweeted = YES;
+        self.tweet.retweetCount ++;
+        [[TwitterClient sharedInstance] doRetweet:self.tweet.tweetId completion:nil];
+    }
+    self.favoritedLabel.text = [NSString stringWithFormat:@"%ld", self.tweet.retweetCount];
+
+}
 - (IBAction)onFav:(id)sender {
     if(self.tweet.favorited){
         [self.favButton setImage:[UIImage imageNamed:@"fav"] forState:UIControlStateNormal];
-        self.tweet.favorited = false;
+        self.tweet.favorited = NO;
         self.tweet.favCount --;
                  [[TwitterClient sharedInstance] doUnFavorite:self.tweet.tweetId completion:nil];
     } else {
         [self.favButton setImage:[UIImage imageNamed:@"faved"] forState:UIControlStateNormal];
-        self.tweet.favorited = true;
+        self.tweet.favorited = YES;
         self.tweet.favCount ++;
         [[TwitterClient sharedInstance] doFavorite:self.tweet.tweetId completion:nil];
     }
@@ -70,6 +92,9 @@
     //[self.retweetButton setImage:[UIImage imageNamed: @"retweet"] forState:UIControlStateNormal];
     if (self.tweet.favorited) {
         [self.favButton setImage:[UIImage imageNamed: @"faved"] forState:UIControlStateNormal];
+    }
+    if (self.tweet.retweeted) {
+        [self.retweetButton setImage:[UIImage imageNamed: @"retweeted"] forState:UIControlStateNormal];
     }
     if (self.tweet.tweetPhotoUrl != nil) {
         [self.tweetPhotoImage setImageWithURL:[NSURL URLWithString:self.tweet.tweetPhotoUrl] placeholderImage:[UIImage imageNamed:@"imagePlaceHolder"]];

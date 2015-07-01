@@ -8,14 +8,18 @@
 
 #import "TwitterClient.h"
 #import "Tweet.h"
+
+
 NSString * const kTwitterConsumerKey = @"TJTIL8g3TMYTFCb3aYyIZH1Dm";
 NSString * const kTwitterConsumerSecret = @"pYQ62WZO0Ox7bvcFCLiSGUIStHbT86vq51ZMGWLjjVcDUz1CfA";
 //NSString * const kTwitterConsumerKey = @"NwlJvq274whdPxt2KNBw89ikO";
 //NSString * const kTwitterConsumerSecret = @"iZw2uzjwcq7AIbHuaCY5VeIMDcI0YE52BRybFvBAFYR2g2qwAV";
 NSString * const kTwitterBaseUrl = @"https://api.twitter.com";
+
 @interface TwitterClient ()
 
 @property (nonatomic, strong) void (^loginCompletion)(User *user, NSError *error);
+
 
 @end
 
@@ -28,23 +32,32 @@ NSString * const kTwitterBaseUrl = @"https://api.twitter.com";
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         if (instance == nil) {
-            instance = [[TwitterClient alloc] initWithBaseURL:[NSURL URLWithString:kTwitterBaseUrl] consumerKey:kTwitterConsumerKey consumerSecret:kTwitterConsumerSecret];
+           
+            instance = [[TwitterClient alloc] initWithBaseURL:[NSURL URLWithString:kTwitterBaseUrl]
+                                                  consumerKey:kTwitterConsumerKey
+                                               consumerSecret:kTwitterConsumerSecret];
+            
+            
         }
     });
     
     return instance;
 }
+
 - (void)loginWithCompletion:(void (^)(User *user, NSError *error))completion {
     self.loginCompletion = completion;
     [self.requestSerializer removeAccessToken];
     [self fetchRequestTokenWithPath:@"oauth/request_token" method:@"GET" callbackURL:[NSURL URLWithString:@"cptwitterdemo://oauth"] scope:nil success:^(BDBOAuthToken *requestToken) {
         NSURL *authUrl = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.twitter.com/oauth/authorize?oauth_token=%@", requestToken.token]];
+        
         [[UIApplication sharedApplication] openURL:authUrl];
     } failure:^(NSError *error) {
         NSLog(@"Faile dot get request token with error %@", error);
         self.loginCompletion(nil, error);
     }];
+    
 }
+
 - (void)openURL:(NSURL *)url {
     
     [self fetchAccessTokenWithPath:@"oauth/access_token" method:@"POST" requestToken:[BDBOAuthToken tokenWithQueryString:url.query] success:^(BDBOAuthToken *accessToken) {
@@ -95,10 +108,7 @@ NSString * const kTwitterBaseUrl = @"https://api.twitter.com";
        }];
     
 }
-
-
-
-
+ 
 - (void)doUnFavorite:(NSString *)tweetId completion:(void (^)(NSError *error))completion {
     [self POST:[NSString stringWithFormat:@"1.1/favorites/destroy.json?id=%@", tweetId]
     parameters:@{@"id": tweetId}
@@ -109,5 +119,47 @@ NSString * const kTwitterBaseUrl = @"https://api.twitter.com";
            NSLog(@"unFav Fail, %@", error);
        }];
     
+}
+
+- (void)doRetweet:(NSString *)tweetId completion:(void (^)(NSError *error))completion {
+    NSLog(@"doRetweet");
+    NSLog(@"tweetid =%@", tweetId);
+    [self POST:[NSString stringWithFormat:@"1.1/statuses/retweet/%@.json", tweetId]
+    parameters:@{@"id": tweetId}
+       success:^(AFHTTPRequestOperation *operation, id responseObject) {
+           NSLog(@"Retweet success");
+       }
+       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+           NSLog(@"Retweet Fail, %@", error);
+       }];
+    
+}
+
+- (void)doUnRetweet:(NSString *)tweetId completion:(void (^)(NSError *error))completion {
+     NSLog(@"doUnRetweet");
+     NSLog(@"tweetid =%@", tweetId);
+    
+    [self POST:[NSString stringWithFormat:@"1.1/statuses/show.json?id=%@", tweetId]
+    parameters:@{@"id": tweetId}
+       success:^(AFHTTPRequestOperation *operation, id responseObject) {
+           NSLog(@"get statuses ====%@", responseObject);
+       }
+       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+           NSLog(@"UnRetweet Fail, %@", error);
+       }];
+    
+}
+
+- (void)doTweet:(NSMutableDictionary *)params completion:(void (^)(NSError *error))completion {
+    NSLog(@"doTweet");
+    NSLog(@"post =%@", params);
+    [self POST:[NSString stringWithFormat:@"1.1/statuses/update.json"]
+    parameters:params
+       success:^(AFHTTPRequestOperation *operation, id responseObject) {
+           NSLog(@"post success ====%@", responseObject);
+       }
+       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+           NSLog(@"post Fail, %@", error);
+       }];
 }
 @end

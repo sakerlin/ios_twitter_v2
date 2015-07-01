@@ -1,0 +1,3 @@
+*.swp
+Podfile.lock
+xcworkspace/

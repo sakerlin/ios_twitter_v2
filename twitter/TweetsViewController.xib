@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TweetsViewController">
             <connections>
+                <outlet property="composeButton" destination="xqM-jW-bvM" id="Q7h-c9-dHA"/>
                 <outlet property="tableView" destination="f2e-Ut-zm6" id="nlj-6V-AYb"/>
                 <outlet property="tweetNav" destination="6LV-h6-bm7" id="f2r-dT-QNy"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -32,6 +33,18 @@
                                     </state>
                                     <connections>
                                         <action selector="onLogout:" destination="-1" eventType="touchUpInside" id="HYU-VE-kTZ"/>
+                                    </connections>
+                                </button>
+                            </barButtonItem>
+                            <barButtonItem key="rightBarButtonItem" style="plain" id="pIw-o8-8OA">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xqM-jW-bvM">
+                                    <rect key="frame" x="489" y="33" width="40" height="40"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" image="compose">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="onCompose:" destination="-1" eventType="touchUpInside" id="nkk-J9-oby"/>
                                     </connections>
                                 </button>
                             </barButtonItem>
@@ -64,4 +77,7 @@
             <point key="canvasLocation" x="260" y="419"/>
         </view>
     </objects>
+    <resources>
+        <image name="compose" width="128" height="128"/>
+    </resources>
 </document>

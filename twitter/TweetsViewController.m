@@ -12,7 +12,8 @@
 #import "TwitterClient.h"
 #import "TweetsCell.h"
 #import "SVProgressHUD.h"
-@interface TweetsViewController ()<UITableViewDataSource, UITableViewDelegate>
+#import "ComposeViewController.h"
+@interface TweetsViewController ()<UITableViewDataSource, UITableViewDelegate,TweetCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property(atomic, strong) NSMutableArray *tweets;
 @property (nonatomic, strong) UIRefreshControl *tableRefreshControl;
@@ -24,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UINavigationBar *tweetNav;
 
 @property (nonatomic, assign) BOOL isLoadingOnTheFly;
+@property (weak, nonatomic) IBOutlet UIButton *composeButton;
 
 @end
 
@@ -42,6 +44,9 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
+    UIColor *blueColor = [UIColor  colorWithRed:85.0f/255.0f green:172.0f/255.0f blue:238.0f/255.0f alpha:1.0f];
+    self.tweetNav.barTintColor = blueColor;
+    self.tweetNav.tintColor = [UIColor whiteColor];
      //pull to refesh
     self.tableRefreshControl = [[UIRefreshControl alloc] init];
     [self.tableRefreshControl addTarget:self action:@selector(onPulltofresh) forControlEvents:UIControlEventValueChanged];
@@ -121,6 +126,12 @@
     }];
 }
 
+- (IBAction)onCompose:(id)sender {
+    NSLog(@"oncompose");
+    ComposeViewController *Cvc = [[ComposeViewController alloc] init];
+    [self presentViewController:Cvc animated:YES completion:nil];
+
+}
 
 
 - (void)didReceiveMemoryWarning {
@@ -131,8 +142,17 @@
 - (IBAction)onLogout:(id)sender {
     [User logout];
 }
-
-
+- (void)TweetsCell:(TweetsCell *)TweetsCell onReplyClick:(Tweet *)originlTweet {
+    NSLog(@"do click reply1");
+    [self onReply:originlTweet];
+}
+- (void)onReply:(Tweet *)originalTweet {
+    ComposeViewController *Cvc = [[ComposeViewController alloc] init];
+    Cvc.originalTweet = originalTweet;
+    NSLog(@"do click reply");
+    //UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:cvc];
+     [self presentViewController:Cvc animated:YES completion:nil];
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.tweets.count;
 }
@@ -142,6 +162,7 @@
     TweetsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetsCell"];
     cell.tweet = self.tweets[(NSUInteger) indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.delegate = self;
     // Infinite loading
     if (indexPath.row == self.tweets.count - 1 && self.lastTweetsCount == 20 && !self.isLoadingOnTheFly) {
         NSMutableDictionary *params = [NSMutableDictionary dictionary];

@@ -28,28 +28,7 @@ NSString * const UserDidLogoutNotification = @"UserDidLogoutNotification";
         self.screen_name = dictionary[@"screen_name"];
         self.profileImageUrl = dictionary[@"profile_image_url"];
         self.tagline = dictionary[@"description"];
-        /*
-        NSString *createAtString = dictionary[@"created_at"];
-        NSDateFormatter *formater = [[NSDateFormatter alloc] init];
-        formater.dateFormat = @"EEE MMM d HH:mm:ss Z y";
-        self.createAt = [formater dateFromString:createAtString];
-        self.favoritesCount = [dictionary[@"favourites_count"] integerValue];
-        self.followersCount = [dictionary[@"followers_count"] integerValue];
-        if ([dictionary[@"following"] integerValue] == 1) {
-            self.following = YES;
-        } else {
-            self.following = NO;
-        }
-        self.friendsCount = [dictionary[@"friends_count"] integerValue];
-        self.userId = dictionary[@"id_str"];
-        self.location = dictionary[@"location"];
-        if ([dictionary[@"verified"] integerValue] == 1) {
-            self.verified = YES;
-        } else {
-            self.verified = NO;
-        }
-        self.profileBannerImage = dictionary[@"profile_banner_image"];
-        */
+        
     }
     return self;
 }
