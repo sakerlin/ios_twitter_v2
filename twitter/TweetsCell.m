@@ -31,17 +31,11 @@
 
 @implementation TweetsCell
 - (IBAction)onReply:(id)sender {
-    NSLog(@"on reply");
-    NSLog(@"%@", self.tweet);
     [self.delegate TweetsCell:self onReplyClick:self.tweet];
 }
 - (IBAction)onRetweet:(id)sender {
-    NSLog(self.tweet.retweeted ? @"YES" :@"NO");
     if(self.tweet.retweeted){
-       // [self.retweetButton setImage:[UIImage imageNamed:@"retweet"] forState:UIControlStateNormal];
-       // self.tweet.retweeted = NO;
-        //self.tweet.retweetCount --;
-       // [[TwitterClient sharedInstance] doUnRetweet:self.tweet.tweetId completion:nil];
+       
     } else {
         [self.retweetButton setImage:[UIImage imageNamed:@"retweeted"] forState:UIControlStateNormal];
         self.tweet.retweeted = YES;
@@ -84,17 +78,12 @@
     self.nickName.text = self.tweet.name;
     self.text.text = self.tweet.text;
     self.favoritedLabel.text = @"";
-     self.retweetLabel.text = @"";
+    self.retweetLabel.text = @"";
     
     self.timeStamp.text = self.tweet.createdAt.shortTimeAgoSinceNow;
     self.tweetPhotoImageHeight.constant = 0.0;
     self.authorImageView.layer.cornerRadius = 4;
     self.authorImageView.clipsToBounds = YES;
-    
-    
-    NSLog(@"retweetCount=%ld,favCount=%ld",self.tweet.retweetCount,self.tweet.favCount);
-    NSLog( self.tweet.favorited ? @"favorited:YES" : @"favorited:No");
-    NSLog( self.tweet.retweeted ? @"retweeted:YES" : @"retweeted:No");
     
     if(self.tweet.favCount > 0){
         self.favoritedLabel.text = [NSString stringWithFormat:@"%ld", self.tweet.favCount];
@@ -112,7 +101,12 @@
     }
     
     if (self.tweet.tweetPhotoUrl != nil) {
+        UIImage *photo = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString: self.tweet.tweetPhotoUrl]]];
+        
         [self.tweetPhotoImage setImageWithURL:[NSURL URLWithString:self.tweet.tweetPhotoUrl] placeholderImage:[UIImage imageNamed:@"imagePlaceHolder"]];
+        float ratio = (photo.size.width / photo.size.height);
+        self.tweetPhotoImageHeight.constant = self.tweetPhotoImage.image.size.width / ratio;
+        
     } else {
         [self.tweetPhotoImage setImage:nil];
         self.tweetPhotoImageHeight.constant = 0.0;

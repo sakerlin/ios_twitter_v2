@@ -14,10 +14,24 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SHy-N1-YMD">
-                    <rect key="frame" x="141" y="77" width="38" height="30"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tbird" translatesAutoresizingMaskIntoConstraints="NO" id="Tnd-Oj-Oox">
+                    <rect key="frame" x="276" y="276" width="48" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="48" id="ZuA-pJ-EcV"/>
+                        <constraint firstAttribute="height" constant="48" id="fVo-lR-U78"/>
+                        <constraint firstAttribute="height" id="ryp-c3-i5g"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="ryp-c3-i5g"/>
+                        </mask>
+                    </variation>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SHy-N1-YMD" customClass="tweetButton">
+                    <rect key="frame" x="278" y="332" width="45" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <state key="normal" title="Login">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="onLogin:" destination="-1" eventType="touchUpInside" id="fdI-m8-JUA"/>
@@ -25,7 +39,26 @@
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="centerX" secondItem="Tnd-Oj-Oox" secondAttribute="centerX" id="5tN-f6-fa8"/>
+                <constraint firstItem="Tnd-Oj-Oox" firstAttribute="centerX" secondItem="SHy-N1-YMD" secondAttribute="centerX" id="BcQ-La-tOg"/>
+                <constraint firstAttribute="centerY" secondItem="SHy-N1-YMD" secondAttribute="centerY" id="F75-G3-3NC"/>
+                <constraint firstAttribute="centerX" secondItem="Tnd-Oj-Oox" secondAttribute="centerX" id="P1A-pB-0bZ"/>
+                <constraint firstAttribute="centerY" secondItem="Tnd-Oj-Oox" secondAttribute="centerY" id="QkF-hu-dlV"/>
+                <constraint firstItem="SHy-N1-YMD" firstAttribute="top" secondItem="Tnd-Oj-Oox" secondAttribute="bottom" constant="8" id="TOw-Ie-XZw"/>
+                <constraint firstAttribute="centerY" secondItem="Tnd-Oj-Oox" secondAttribute="centerY" id="sGQ-vL-sr3"/>
+            </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="5tN-f6-fa8"/>
+                    <exclude reference="QkF-hu-dlV"/>
+                    <exclude reference="F75-G3-3NC"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="391" y="447"/>
         </view>
     </objects>
+    <resources>
+        <image name="tbird" width="48" height="48"/>
+    </resources>
 </document>

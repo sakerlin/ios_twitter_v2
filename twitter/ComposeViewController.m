@@ -28,15 +28,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    NSLog(@"post");
+    
     if(!self.originalTweet){
         User *user = [User currentUser];
-        NSLog(@"no origin tweet");
         [self.userProfileImage setImageWithURL:[NSURL URLWithString:user.profileImageUrl] ];
         self.userScrennNameLabel.text = [NSString stringWithFormat:@"@%@", user.screen_name];
         self.userNameLabel.text = user.name;
     } else {
-        NSLog(@"have origin tweet");
+        
         [self.userProfileImage setImageWithURL:[NSURL URLWithString:self.originalTweet.user.profileImageUrl] ];
         self.userScrennNameLabel.text = [NSString stringWithFormat:@"@%@", self.originalTweet.user.screen_name];
         self.userNameLabel.text = self.originalTweet.user.name;
@@ -56,7 +55,6 @@
         NSMutableDictionary *params = [NSMutableDictionary dictionary];
         [params setObject:self.textView.text forKey:@"status"];
         if(self.originalTweet){
-            NSLog(@"tweeid = %@",self.originalTweet.tweetId);
             [params addEntriesFromDictionary:@{@"in_reply_to_status_id" : self.originalTweet.tweetId}];
         }
         [[TwitterClient sharedInstance] doTweet:params completion:nil];
@@ -65,11 +63,9 @@
     }
 }
 -(void) textViewDidChangeSelection:(UITextView *)textView{
-    NSLog(@"%ld",self.textView.text.length);
     self.postCounterLabel.text = [NSString stringWithFormat:@"%ld",self.textView.text.length];
 }
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
-    NSLog(@"textViewShouldBeginEditing:");
     return YES;
 }
 

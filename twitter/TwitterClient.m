@@ -9,11 +9,8 @@
 #import "TwitterClient.h"
 #import "Tweet.h"
 
-
 NSString * const kTwitterConsumerKey = @"TJTIL8g3TMYTFCb3aYyIZH1Dm";
 NSString * const kTwitterConsumerSecret = @"pYQ62WZO0Ox7bvcFCLiSGUIStHbT86vq51ZMGWLjjVcDUz1CfA";
-//NSString * const kTwitterConsumerKey = @"NwlJvq274whdPxt2KNBw89ikO";
-//NSString * const kTwitterConsumerSecret = @"iZw2uzjwcq7AIbHuaCY5VeIMDcI0YE52BRybFvBAFYR2g2qwAV";
 NSString * const kTwitterBaseUrl = @"https://api.twitter.com";
 
 @interface TwitterClient ()
@@ -32,12 +29,9 @@ NSString * const kTwitterBaseUrl = @"https://api.twitter.com";
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         if (instance == nil) {
-           
             instance = [[TwitterClient alloc] initWithBaseURL:[NSURL URLWithString:kTwitterBaseUrl]
                                                   consumerKey:kTwitterConsumerKey
                                                consumerSecret:kTwitterConsumerSecret];
-            
-            
         }
     });
     

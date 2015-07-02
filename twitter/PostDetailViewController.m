@@ -20,8 +20,10 @@
 @property (weak, nonatomic) IBOutlet UIImageView *tweetPhotoImage;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tweetPhotoImageHeight;
 @property (weak, nonatomic) IBOutlet UIButton *replyButton;
+@property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic) IBOutlet UIButton *retweetButton;
 @property (weak, nonatomic) IBOutlet UIButton *favButton;
+
 @end
 
 @implementation PostDetailViewController
@@ -51,14 +53,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    UIColor *blueColor = [UIColor  colorWithRed:85.0f/255.0f green:172.0f/255.0f blue:238.0f/255.0f alpha:1.0f];
+    self.topView.backgroundColor =  blueColor;
+    
     [self.userProfileImage setImageWithURL:[NSURL URLWithString:self.originalTweet.user.profileImageUrl] ];
     self.userScrennNameLabel.text = [NSString stringWithFormat:@"@%@", self.originalTweet.user.screen_name];
     self.userNameLabel.text = self.originalTweet.user.name;
     self.contentText.text = self.originalTweet.text;
     //self.tweetPhotoImageHeight.constant = 0.0;
-    NSLog(@"<==========================");
-    NSLog( self.originalTweet.favorited ? @"favorited:YES" : @"favorited:No");
-    NSLog( self.originalTweet.retweeted ? @"retweeted:YES" : @"retweeted:No");
+    
+    
     if (self.originalTweet.favorited) {
         [self.favButton setImage:[UIImage imageNamed: @"faved"] forState:UIControlStateNormal];
     }
@@ -67,10 +71,13 @@
     }
     
     if (self.originalTweet.tweetPhotoUrl != nil) {
+        UIImage *photo = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString: self.originalTweet.tweetPhotoUrl]]];
         [self.tweetPhotoImage setImageWithURL:[NSURL URLWithString:self.originalTweet.tweetPhotoUrl] placeholderImage:[UIImage imageNamed:@"imagePlaceHolder"]];
-        //UIImage *image = self.tweetPhotoImage.image;
-
+        float ratio = (photo.size.width / photo.size.height);
+        self.tweetPhotoImageHeight.constant = self.tweetPhotoImage.frame.size.width / ratio;
+         
     } else {
+        NSLog(@"no photo");
         [self.tweetPhotoImage setImage:nil];
         self.tweetPhotoImageHeight.constant = 0.0;
     }

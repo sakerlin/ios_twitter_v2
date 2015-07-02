@@ -14,13 +14,12 @@
 @end
 
 @implementation LoginViewController
+
+
 - (IBAction)onLogin:(id)sender {
         [[TwitterClient sharedInstance] loginWithCompletion:^(User *user, NSError *error) {
         if (user) {
-            //ContainerViewController *cvc = [[ContainerViewController alloc] init];
-            //[self presentViewController:cvc animated:YES completion:nil];
             [self presentViewController:[[TweetsViewController alloc] init] animated:YES completion:nil];
-            NSLog(@"user name %@", user.name);
         } else {
             UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Failed to login"
                                                                            message:[NSString stringWithFormat:@("%@"), error.localizedDescription]
@@ -40,7 +39,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    UIColor *blueColor = [UIColor  colorWithRed:85.0f/255.0f green:172.0f/255.0f blue:238.0f/255.0f alpha:1.0f];
+    self.view.backgroundColor =  blueColor;
 }
 
 - (void)didReceiveMemoryWarning {

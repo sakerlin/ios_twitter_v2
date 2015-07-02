@@ -48,22 +48,23 @@
     UIColor *blueColor = [UIColor  colorWithRed:85.0f/255.0f green:172.0f/255.0f blue:238.0f/255.0f alpha:1.0f];
     self.tweetNav.barTintColor = blueColor;
     self.tweetNav.tintColor = [UIColor whiteColor];
+    [self.tweetNav setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     //pull to refesh
     self.tableRefreshControl = [[UIRefreshControl alloc] init];
     [self.tableRefreshControl addTarget:self action:@selector(onPulltofresh) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.tableRefreshControl atIndex:0];
     
+    //load more
     UIView *tableFooter = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, 30)];
     self.loadMoreView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     self.loadMoreView.center = tableFooter.center;
     [tableFooter addSubview:self.loadMoreView];
     self.tableView.tableFooterView = tableFooter;
-    
+     
+    //init status
     [SVProgressHUD setBackgroundColor:[UIColor clearColor]];
     [SVProgressHUD setForegroundColor:[UIColor blueColor]];
-    //[User logout];
-    
-    //init status
+
     self.lastTweetsCount = 0;
     self.isInitLoading = YES;
     self.isInfiniteLoading = NO;
@@ -106,8 +107,7 @@
                 self.navigationController.navigationBarHidden = NO;
             } else {
                 self.isInitLoading = NO;
-                //[self loadCompletionAnimation];
-            }
+             }
             
             [self.tableView reloadData];
         } else {
@@ -129,16 +129,9 @@
 }
 
 - (IBAction)onCompose:(id)sender {
-    NSLog(@"oncompose");
     ComposeViewController *Cvc = [[ComposeViewController alloc] init];
     [self presentViewController:Cvc animated:YES completion:nil];
 
-}
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (IBAction)onLogout:(id)sender {
@@ -168,7 +161,6 @@
         NSInteger max_id = [cell.tweet.tweetId integerValue] - 1;
         [params setObject:@(max_id) forKey:@"max_id"];
         self.isInfiniteLoading = YES;
-        NSLog(@"%@",params);
         [self getHomeTimeline:params];
     }
     return cell;
@@ -184,10 +176,14 @@
    
     PostDetailViewController *Pvc = [[PostDetailViewController alloc] init];
     Pvc.originalTweet = originalTweet;
-    NSLog( originalTweet.favorited ? @"favorited:YES" : @"favorited:No");
-    NSLog( originalTweet.retweeted ? @"retweeted:YES" : @"retweeted:No");
     [self presentViewController:Pvc animated:YES completion:nil];
 }
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 /*
 #pragma mark - Navigation
 
