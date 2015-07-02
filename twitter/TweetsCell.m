@@ -83,19 +83,34 @@
     self.author.text = [NSString stringWithFormat:@"@%@", self.tweet.screen_name];
     self.nickName.text = self.tweet.name;
     self.text.text = self.tweet.text;
-    self.favoritedLabel.text = [NSString stringWithFormat:@"%ld", self.tweet.favCount];
-    self.retweetLabel.text = [NSString stringWithFormat:@"%ld", self.tweet.retweetCount];
+    self.favoritedLabel.text = @"";
+     self.retweetLabel.text = @"";
+    
     self.timeStamp.text = self.tweet.createdAt.shortTimeAgoSinceNow;
     self.tweetPhotoImageHeight.constant = 0.0;
-    // [self.replyButton setImage:[UIImage imageNamed: @"reply"] forState:UIControlStateNormal];
+    self.authorImageView.layer.cornerRadius = 4;
+    self.authorImageView.clipsToBounds = YES;
     
-    //[self.retweetButton setImage:[UIImage imageNamed: @"retweet"] forState:UIControlStateNormal];
+    
+    NSLog(@"retweetCount=%ld,favCount=%ld",self.tweet.retweetCount,self.tweet.favCount);
+    NSLog( self.tweet.favorited ? @"favorited:YES" : @"favorited:No");
+    NSLog( self.tweet.retweeted ? @"retweeted:YES" : @"retweeted:No");
+    
+    if(self.tweet.favCount > 0){
+        self.favoritedLabel.text = [NSString stringWithFormat:@"%ld", self.tweet.favCount];
+    }
+    
+    if(self.tweet.retweetCount > 0){
+        self.retweetLabel.text = [NSString stringWithFormat:@"%ld", self.tweet.retweetCount];
+    }
+    
     if (self.tweet.favorited) {
         [self.favButton setImage:[UIImage imageNamed: @"faved"] forState:UIControlStateNormal];
     }
     if (self.tweet.retweeted) {
         [self.retweetButton setImage:[UIImage imageNamed: @"retweeted"] forState:UIControlStateNormal];
     }
+    
     if (self.tweet.tweetPhotoUrl != nil) {
         [self.tweetPhotoImage setImageWithURL:[NSURL URLWithString:self.tweet.tweetPhotoUrl] placeholderImage:[UIImage imageNamed:@"imagePlaceHolder"]];
     } else {

@@ -13,12 +13,14 @@
 #import "TweetsCell.h"
 #import "SVProgressHUD.h"
 #import "ComposeViewController.h"
+#import "PostDetailViewController.h"
 @interface TweetsViewController ()<UITableViewDataSource, UITableViewDelegate,TweetCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property(atomic, strong) NSMutableArray *tweets;
 @property (nonatomic, strong) UIRefreshControl *tableRefreshControl;
 @property (nonatomic, strong) UIActivityIndicatorView *loadMoreView;
 @property (nonatomic, assign) NSInteger lastTweetsCount;
+@property (nonatomic, assign) NSInteger initCount;
 @property (nonatomic, assign) BOOL isInfiniteLoading;
 @property (nonatomic, assign) BOOL isInitLoading;
 @property (nonatomic, assign) BOOL isPullDownRefreshing;
@@ -34,7 +36,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-          
   
     [self getHomeTimeline:nil];
     
@@ -47,7 +48,7 @@
     UIColor *blueColor = [UIColor  colorWithRed:85.0f/255.0f green:172.0f/255.0f blue:238.0f/255.0f alpha:1.0f];
     self.tweetNav.barTintColor = blueColor;
     self.tweetNav.tintColor = [UIColor whiteColor];
-     //pull to refesh
+    //pull to refesh
     self.tableRefreshControl = [[UIRefreshControl alloc] init];
     [self.tableRefreshControl addTarget:self action:@selector(onPulltofresh) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.tableRefreshControl atIndex:0];
@@ -58,16 +59,15 @@
     [tableFooter addSubview:self.loadMoreView];
     self.tableView.tableFooterView = tableFooter;
     
-    
     [SVProgressHUD setBackgroundColor:[UIColor clearColor]];
-    [SVProgressHUD setForegroundColor:[UIColor  colorWithRed:184.0f/255.0f green:11.0f/255.0f blue:4.0f/255.0f alpha:1.0f]];
+    [SVProgressHUD setForegroundColor:[UIColor blueColor]];
     //[User logout];
     
     //init status
     self.lastTweetsCount = 0;
     self.isInitLoading = YES;
     self.isInfiniteLoading = NO;
-
+    self.initCount = 12;
 }
 // Pull down support
 - (void)onLogoutButton {
@@ -92,11 +92,13 @@
             
             if (self.isInfiniteLoading) {
                 [self.tweets addObjectsFromArray:tweets];
+               
             } else {
                 self.tweets = [NSMutableArray arrayWithArray:tweets];
             }
             
             self.lastTweetsCount = tweets.count;
+             self.initCount = tweets.count;
             [self.tableRefreshControl endRefreshing];
             if (!self.isInitLoading) {
                 //self.backgroundView.hidden = YES;
@@ -143,15 +145,12 @@
     [User logout];
 }
 - (void)TweetsCell:(TweetsCell *)TweetsCell onReplyClick:(Tweet *)originlTweet {
-    NSLog(@"do click reply1");
     [self onReply:originlTweet];
 }
 - (void)onReply:(Tweet *)originalTweet {
     ComposeViewController *Cvc = [[ComposeViewController alloc] init];
     Cvc.originalTweet = originalTweet;
-    NSLog(@"do click reply");
-    //UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:cvc];
-     [self presentViewController:Cvc animated:YES completion:nil];
+    [self presentViewController:Cvc animated:YES completion:nil];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.tweets.count;
@@ -164,7 +163,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.delegate = self;
     // Infinite loading
-    if (indexPath.row == self.tweets.count - 1 && self.lastTweetsCount == 20 && !self.isLoadingOnTheFly) {
+    if (indexPath.row == self.tweets.count - 1 && self.lastTweetsCount == self.initCount && !self.isLoadingOnTheFly) {
         NSMutableDictionary *params = [NSMutableDictionary dictionary];
         NSInteger max_id = [cell.tweet.tweetId integerValue] - 1;
         [params setObject:@(max_id) forKey:@"max_id"];
@@ -173,6 +172,21 @@
         [self getHomeTimeline:params];
     }
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+     NSInteger row = indexPath.row;
+    Tweet *originlTweet = self.tweets[row];
+    [self onViewDetail: originlTweet];
+}
+
+- (void)onViewDetail:(Tweet *)originalTweet {
+   
+    PostDetailViewController *Pvc = [[PostDetailViewController alloc] init];
+    Pvc.originalTweet = originalTweet;
+    NSLog( originalTweet.favorited ? @"favorited:YES" : @"favorited:No");
+    NSLog( originalTweet.retweeted ? @"retweeted:YES" : @"retweeted:No");
+    [self presentViewController:Pvc animated:YES completion:nil];
 }
 /*
 #pragma mark - Navigation

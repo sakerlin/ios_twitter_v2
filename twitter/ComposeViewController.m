@@ -12,49 +12,43 @@
 #import "TwitterClient.h"
 
 @interface ComposeViewController ()<UITextViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UIImageView *userProfileImage;
-@property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userScrennNameLabel;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UILabel *postCounterLabel;
 @property (weak, nonatomic) IBOutlet UIButton *postButton;
 
-
 @end
 
 @implementation ComposeViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"X"
-                                                                              style:UIBarButtonItemStylePlain
-                                                                             target:self
-                                                                             action:@selector(onCancelButton)];
-    [self.navBar pushNavigationItem:self.navigationItem animated:NO];
-    UIColor *blueColor = [UIColor  colorWithRed:85.0f/255.0f green:172.0f/255.0f blue:238.0f/255.0f alpha:1.0f];
-    self.navBar.barTintColor = blueColor;
-    self.navBar.tintColor = [UIColor whiteColor];
-    
+    NSLog(@"post");
     if(!self.originalTweet){
         User *user = [User currentUser];
         NSLog(@"no origin tweet");
         [self.userProfileImage setImageWithURL:[NSURL URLWithString:user.profileImageUrl] ];
         self.userScrennNameLabel.text = [NSString stringWithFormat:@"@%@", user.screen_name];
         self.userNameLabel.text = user.name;
-        
-        self.textView.delegate = self;
     } else {
         NSLog(@"have origin tweet");
-        NSLog(@"%@",self.originalTweet.tweetPhotoUrl);
         [self.userProfileImage setImageWithURL:[NSURL URLWithString:self.originalTweet.user.profileImageUrl] ];
         self.userScrennNameLabel.text = [NSString stringWithFormat:@"@%@", self.originalTweet.user.screen_name];
         self.userNameLabel.text = self.originalTweet.user.name;
         self.textView.text = [NSString stringWithFormat:@"@%@ ", self.originalTweet.user.screen_name];
     }
+    self.textView.delegate = self;
     [self.textView becomeFirstResponder];
+}
+
+- (IBAction)onCancel:(id)sender {
+    [self.view endEditing:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)onPost:(id)sender {
@@ -70,8 +64,7 @@
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
--(void) textViewDidChangeSelection:(UITextView *)textView
-{
+-(void) textViewDidChangeSelection:(UITextView *)textView{
     NSLog(@"%ld",self.textView.text.length);
     self.postCounterLabel.text = [NSString stringWithFormat:@"%ld",self.textView.text.length];
 }
@@ -98,10 +91,6 @@
     return YES;
 }
 
-- (void)onCancelButton{
-    [self dismissViewControllerAnimated:YES completion:nil];
-    //  [self.delegate filtersViewController:self didChangeFilters:self.filters];
-}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

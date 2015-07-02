@@ -18,9 +18,9 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <navigationBar contentMode="scaleToFill" restorationIdentifier="tweetNav" translatesAutoresizingMaskIntoConstraints="NO" id="6LV-h6-bm7">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="75"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="55"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="75" id="YZR-KX-FuK"/>
+                        <constraint firstAttribute="height" constant="55" id="YZR-KX-FuK"/>
                     </constraints>
                     <items>
                         <navigationItem title="Twitter" id="aKg-HI-i8J">
@@ -38,7 +38,7 @@
                             </barButtonItem>
                             <barButtonItem key="rightBarButtonItem" style="plain" id="pIw-o8-8OA">
                                 <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xqM-jW-bvM">
-                                    <rect key="frame" x="489" y="33" width="40" height="40"/>
+                                    <rect key="frame" x="556" y="23" width="28" height="28"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" image="compose">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -52,7 +52,7 @@
                     </items>
                 </navigationBar>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="f2e-Ut-zm6">
-                    <rect key="frame" x="0.0" y="75" width="600" height="525"/>
+                    <rect key="frame" x="0.0" y="55" width="600" height="545"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
             </subviews>

@@ -23,6 +23,9 @@
 		29E584F81B3C30990087A8F6 /* TwitterClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 29E584F71B3C30990087A8F6 /* TwitterClient.m */; };
 		29F631111B43DB1B00210D7E /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F6310F1B43DB1B00210D7E /* ComposeViewController.m */; };
 		29F631121B43DB1B00210D7E /* ComposeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29F631101B43DB1B00210D7E /* ComposeViewController.xib */; };
+		29F631151B44E3DB00210D7E /* tweetButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F631141B44E3DB00210D7E /* tweetButton.m */; };
+		29F631191B45145B00210D7E /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F631171B45145B00210D7E /* PostDetailViewController.m */; };
+		29F6311A1B45145B00210D7E /* PostDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29F631181B45145B00210D7E /* PostDetailViewController.xib */; };
 		9CC2AB4217075D3C6F2F706E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3666FCE865905D8F4E787AB /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +68,11 @@
 		29F6310E1B43DB1B00210D7E /* ComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeViewController.h; sourceTree = "<group>"; };
 		29F6310F1B43DB1B00210D7E /* ComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
 		29F631101B43DB1B00210D7E /* ComposeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComposeViewController.xib; sourceTree = "<group>"; };
+		29F631131B44E3DB00210D7E /* tweetButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tweetButton.h; sourceTree = "<group>"; };
+		29F631141B44E3DB00210D7E /* tweetButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tweetButton.m; sourceTree = "<group>"; };
+		29F631161B45145B00210D7E /* PostDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostDetailViewController.h; sourceTree = "<group>"; };
+		29F631171B45145B00210D7E /* PostDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostDetailViewController.m; sourceTree = "<group>"; };
+		29F631181B45145B00210D7E /* PostDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostDetailViewController.xib; sourceTree = "<group>"; };
 		E3666FCE865905D8F4E787AB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6243A93B356A12669AA6DBD /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F0218E77FE80C4F4069FEF6C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -115,6 +123,11 @@
 				29F6310E1B43DB1B00210D7E /* ComposeViewController.h */,
 				29F6310F1B43DB1B00210D7E /* ComposeViewController.m */,
 				29F631101B43DB1B00210D7E /* ComposeViewController.xib */,
+				29F631131B44E3DB00210D7E /* tweetButton.h */,
+				29F631141B44E3DB00210D7E /* tweetButton.m */,
+				29F631161B45145B00210D7E /* PostDetailViewController.h */,
+				29F631171B45145B00210D7E /* PostDetailViewController.m */,
+				29F631181B45145B00210D7E /* PostDetailViewController.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -285,6 +298,7 @@
 				29204A551B3FE0DD0000284D /* TweetsViewController.xib in Resources */,
 				296ED4D91B3BA6B1009133E3 /* LaunchScreen.xib in Resources */,
 				296ED4D61B3BA6B1009133E3 /* Images.xcassets in Resources */,
+				29F6311A1B45145B00210D7E /* PostDetailViewController.xib in Resources */,
 				29E584F51B3C2F1A0087A8F6 /* LoginViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -337,10 +351,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				29E584F81B3C30990087A8F6 /* TwitterClient.m in Sources */,
+				29F631151B44E3DB00210D7E /* tweetButton.m in Sources */,
 				296ED4CE1B3BA6B1009133E3 /* AppDelegate.m in Sources */,
 				29204A501B3CF9440000284D /* User.m in Sources */,
 				29F631111B43DB1B00210D7E /* ComposeViewController.m in Sources */,
 				29204A5A1B3FF5710000284D /* TweetsCell.m in Sources */,
+				29F631191B45145B00210D7E /* PostDetailViewController.m in Sources */,
 				29204A4D1B3CF8F90000284D /* Tweet.m in Sources */,
 				296ED4CB1B3BA6B1009133E3 /* main.m in Sources */,
 				29E584F41B3C2F1A0087A8F6 /* LoginViewController.m in Sources */,

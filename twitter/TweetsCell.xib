@@ -14,20 +14,20 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DIY-cg-cqa">
-                        <rect key="frame" x="8" y="8" width="70" height="70"/>
+                        <rect key="frame" x="8" y="8" width="45" height="45"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="70" id="CQ5-ty-EhZ"/>
-                            <constraint firstAttribute="height" constant="70" id="cW4-jR-DeV"/>
+                            <constraint firstAttribute="width" constant="45" id="CQ5-ty-EhZ"/>
+                            <constraint firstAttribute="height" constant="45" id="cW4-jR-DeV"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="布萊恩" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nwA-R9-TPl">
-                        <rect key="frame" x="86" y="8" width="51" height="21"/>
+                        <rect key="frame" x="61" y="8" width="51" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@brian" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="brF-1L-aJ7">
-                        <rect key="frame" x="142" y="8" width="80" height="21"/>
+                        <rect key="frame" x="117" y="8" width="80" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="A28-wP-0nU"/>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="IxU-K4-S0F"/>
@@ -43,7 +43,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="「PTT 鄉民懶人包」免登入幫懶惰的你劃好重點！（iPhone, Android）" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ff-xt-GxL">
-                        <rect key="frame" x="86" y="34" width="291" height="41"/>
+                        <rect key="frame" x="61" y="34" width="316" height="41"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="Faw-od-jUh"/>
                         </constraints>
