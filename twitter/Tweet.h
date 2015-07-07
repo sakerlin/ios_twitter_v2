@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSDate *createdAt;
 @property (nonatomic, strong) User *user;
 @property (nonatomic, strong) NSString *profile_image_url;
+@property (nonatomic, strong) NSString *profileBannerImage;
 @property (nonatomic, strong) NSString *screen_name;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *tweetPhotoUrl;

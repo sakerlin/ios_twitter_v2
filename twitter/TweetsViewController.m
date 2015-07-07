@@ -14,6 +14,8 @@
 #import "SVProgressHUD.h"
 #import "ComposeViewController.h"
 #import "PostDetailViewController.h"
+#import "ProfileViewController.h"
+
 @interface TweetsViewController ()<UITableViewDataSource, UITableViewDelegate,TweetCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property(atomic, strong) NSMutableArray *tweets;
@@ -144,6 +146,15 @@
     ComposeViewController *Cvc = [[ComposeViewController alloc] init];
     Cvc.originalTweet = originalTweet;
     [self presentViewController:Cvc animated:YES completion:nil];
+}
+- (void)TweetsCell:(TweetsCell *)TweetsCell onProfileTap:(Tweet *)originlTweet {
+    [self onProfile:originlTweet];
+}
+
+- (void)onProfile:(Tweet *)originalTweet {
+    ProfileViewController *Pvc = [[ProfileViewController alloc] init];
+    Pvc.originalTweet = originalTweet;
+    [self presentViewController:Pvc animated:YES completion:nil];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.tweets.count;

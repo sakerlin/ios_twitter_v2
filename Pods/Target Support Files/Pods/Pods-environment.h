@@ -66,3 +66,9 @@
 #define COCOAPODS_VERSION_MINOR_SVProgressHUD 1
 #define COCOAPODS_VERSION_PATCH_SVProgressHUD 3
 
+// UIColor-Utilities
+#define COCOAPODS_POD_AVAILABLE_UIColor_Utilities
+#define COCOAPODS_VERSION_MAJOR_UIColor_Utilities 1
+#define COCOAPODS_VERSION_MINOR_UIColor_Utilities 0
+#define COCOAPODS_VERSION_PATCH_UIColor_Utilities 1
+

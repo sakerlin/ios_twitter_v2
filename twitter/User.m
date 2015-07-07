@@ -24,11 +24,15 @@ NSString * const UserDidLogoutNotification = @"UserDidLogoutNotification";
     
     if (self) {
         self.dictionary = dictionary;
+        NSLog(@"%@",dictionary);
         self.name = dictionary[@"name"];
         self.screen_name = dictionary[@"screen_name"];
         self.profileImageUrl = dictionary[@"profile_image_url"];
         self.tagline = dictionary[@"description"];
-        
+        self.profileBannerImage = dictionary[@"profile_banner_url"];
+        self.profileBannerImage = dictionary[@"profile_banner_url"];
+        self.userDescription = dictionary[@"description"];
+        self.profile_background_color = dictionary[@"profile_background_color"];
     }
     return self;
 }

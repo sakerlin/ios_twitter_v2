@@ -17,8 +17,10 @@
             self.text = dictionary[@"text"];
             NSString *createdAtString = dictionary[@"created_at"];
             self.profile_image_url = self.user.profileImageUrl;
+            self.profileBannerImage = self.user.profileBannerImage;
             self.screen_name = self.user.screen_name;
             self.name = self.user.name;
+            
             //NSLog(@"screen_name%@",self.screen_name);
             NSDateFormatter *formater = [[NSDateFormatter alloc] init];
             formater.dateFormat = @"EEE MMM d HH:mm:ss Z y";

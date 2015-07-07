@@ -13,8 +13,8 @@
 
 @protocol TweetCellDelegate <NSObject>
 
- - (void)TweetsCell:(TweetsCell *)TweetsCell onReplyClick:(Tweet *)originlTweet;
-
+- (void)TweetsCell:(TweetsCell *)TweetsCell onReplyClick:(Tweet *)originlTweet;
+- (void)TweetsCell:(TweetsCell *)TweetsCell onProfileTap:(Tweet *)originlTweet;
 @end
 
 @interface TweetsCell : UITableViewCell

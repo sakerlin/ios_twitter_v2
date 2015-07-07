@@ -63,8 +63,14 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    
+    
 }
 
+- (void) onProfileTap{
+    [self.delegate TweetsCell:self onProfileTap:self.tweet];
+    NSLog(@"on profile tap");
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
@@ -111,10 +117,16 @@
         [self.tweetPhotoImage setImage:nil];
         self.tweetPhotoImageHeight.constant = 0.0;
     }
+    [self.authorImageView setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onProfileTap)];
+    [tap setNumberOfTouchesRequired:1];
+    [tap setNumberOfTapsRequired:1];
+    [self.authorImageView addGestureRecognizer:tap];
+    
+    
 }
 -(void) layoutSubviews {
     [super layoutSubviews];
     self.nickName.preferredMaxLayoutWidth = self.nickName.frame.size.width;
-    
 }
 @end
