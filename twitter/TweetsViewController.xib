@@ -18,7 +18,7 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <navigationBar contentMode="scaleToFill" restorationIdentifier="tweetNav" translatesAutoresizingMaskIntoConstraints="NO" id="6LV-h6-bm7">
+                <navigationBar tag="110" contentMode="scaleToFill" restorationIdentifier="tweetNav" translatesAutoresizingMaskIntoConstraints="NO" id="6LV-h6-bm7">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="55"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="55" id="YZR-KX-FuK"/>

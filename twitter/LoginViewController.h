@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface LoginViewController : UIViewController
+@property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) UIViewController *viewController;
 
 @end

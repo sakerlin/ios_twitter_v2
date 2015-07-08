@@ -21,6 +21,8 @@
 
 @interface TweetsViewController : UIViewController<LeftMenuViewControllerDelegate, MainViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *menuButton;
+@property (weak, nonatomic) IBOutlet UIButton *composeButton;
+
 @property (nonatomic, assign) id<TweetsViewControllerDelegate> delegate;
 - (void)goMenuPage:(NSInteger *)row;
 @end

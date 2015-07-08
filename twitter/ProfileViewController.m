@@ -16,6 +16,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *userScrennNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userDescription;
 @property (weak, nonatomic) IBOutlet UIView *profileBannerView;
+@property (weak, nonatomic) IBOutlet UILabel *statusCount;
+@property (weak, nonatomic) IBOutlet UILabel *friendCount;
+@property (weak, nonatomic) IBOutlet UILabel *followerCount;
 
 @end
 
@@ -35,6 +38,12 @@
     self.userNameLabel.text = self.user.name;
     self.userDescription.text = [NSString stringWithFormat:@"%@", self.user.userDescription];
     [self.profileBanner setImageWithURL:[NSURL URLWithString:self.user.profileBannerImage]];
+    NSLog(@"%@",self.user.statuses_count);
+    self.statusCount.text = [NSString stringWithFormat:@"%@",self.user.statuses_count];
+    self.friendCount.text = [NSString stringWithFormat:@"%@",self.user.friends_count];
+    self.followerCount.text = [NSString stringWithFormat:@"%@",self.user.followers_count];
+    //self.followerCount.text = self.user.friends_count;
+    //self.followerCount.text = self.user.followers_count;
     
     self.profileBanner.clipsToBounds = YES;
     [self.userProfileImage setImageWithURL:[NSURL URLWithString:self.user.profileImageUrl]];
@@ -42,6 +51,9 @@
     self.userProfileImage.clipsToBounds = YES;
     [self.userProfileImage.layer setBorderColor: [[UIColor whiteColor] CGColor]];
     [self.userProfileImage.layer setBorderWidth: 3.0];
+    //@property (nonatomic, assign) NSString *friends_count;
+    //@property (nonatomic, assign) NSString *followers_count;
+    //@property (nonatomic, assign) NSString *statuses_count;
 }
 
 - (void)didReceiveMemoryWarning {

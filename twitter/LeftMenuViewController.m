@@ -7,10 +7,14 @@
 //
 
 #import "LeftMenuViewController.h"
- 
+#import "User.h"
+#import "UIImageView+AFNetworking.h"
 @interface LeftMenuViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UINavigationBar *tweetNav;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIImageView *userProfileImage;
+@property (weak, nonatomic) IBOutlet UILabel *userScrennNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (nonatomic, strong) NSArray *menuItem;
 @end
 
@@ -28,8 +32,16 @@
     self.tableView.dataSource = self;
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"MenuCell"];
     
-    self.menuItem = @[@"Profile", @"Home Timeline", @"Mentions"];
-    
+    self.menuItem = @[@"Home Timeline",@"Profile", @"Mentions", @"Sign Out"];
+    User *user = [User currentUser];
+    [self.userProfileImage setImageWithURL:[NSURL URLWithString:user.profileImageUrl]];
+    self.userProfileImage.layer.cornerRadius = 64;
+    self.userProfileImage.clipsToBounds = YES;
+    [self.userProfileImage.layer setBorderColor: [[UIColor grayColor] CGColor]];
+    [self.userProfileImage.layer setBorderWidth: 3.0];
+    self.userScrennNameLabel.text = [NSString stringWithFormat:@"@%@", user.screen_name];
+    self.userNameLabel.text = user.name;
+
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.menuItem.count;
@@ -47,24 +59,7 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    
-        NSInteger *row = indexPath.row;
-    
-    switch ((long)row) {
-        case 0:
-            NSLog(@"Profile");
-            
-            break;
-        case 1:
-            NSLog(@"Home");
-            break;
-        case 2:
-             NSLog(@"Mentions");
-            break;
-        default:
-            break;
-    }
-    [_delegate selectMenuRow:row];
+    [_delegate selectMenuRow:(long)indexPath.row];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -29,9 +29,7 @@
     if (user != nil) {
         self.viewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
         self.window.rootViewController = self.viewController;
-        
-        //self.window.rootViewController = [[TweetsViewController alloc] init];
-    } else {
+  } else {
         self.window.rootViewController = [[LoginViewController alloc] init];
         NSLog(@"not login");
    }

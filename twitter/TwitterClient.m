@@ -82,14 +82,59 @@ NSString * const kTwitterBaseUrl = @"https://api.twitter.com";
     [self GET:@"1.1/statuses/home_timeline.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSArray *tweets = [Tweet tweetsWithArray:responseObject];
         NSLog(@"tweets.count=%lu", (unsigned long)tweets.count);
-       // NSLog(@"%@", responseObject);
+         NSLog(@"params=%@", params);
         completion(tweets, nil);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Failed to get tweets with error %@", error);
         completion(nil, error);
     }];
 }
+- (void)timelineWithParams:(NSDictionary *)params source:(NSString *)source completion:(void (^)(NSArray *tweets, NSError *error))completion {
+    
+    
+    [self GET:[NSString stringWithFormat:@"1.1/application/rate_limit_status.json"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *timeline = [NSString stringWithFormat:@"/statuses/%@", source];
+        
+       //  NSLog(@"responseObject=%@", responseObject[@"resources"][@"statuses"][timeline][@"remaining"]);
+       
+        NSNumber *remain = [NSNumber numberWithInt: (int)responseObject[@"resources"][@"statuses"][timeline][@"remaining"]];
+        NSLog(@"%@ remaining=%d", timeline, [remain intValue]);
+        NSLog(@"ramain > 1 => %@", [remain intValue] > 1 ? @"YES": @"NO");
+        NSLog(@"ramain <= 1 => %@", [remain intValue] <= 1 ? @"YES": @"NO");
+        if([remain intValue] > 1) {
+            
+            [self GET:[NSString stringWithFormat:@"1.1/statuses/%@.json",source] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSArray *tweets = [Tweet tweetsWithArray:responseObject];
+                NSLog(@"tweets.count=%lu", (unsigned long)tweets.count);
+                NSLog(@"params=%@", params);
+                completion(tweets, nil);
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"Failed to get tweets with error %@", error);
+                completion(nil, error);
+            }];
+        } else {
+            
+            
+        }
+        completion(nil, nil);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Failed to get ramain with error %@", error);
+        completion(nil, error);
+    }];
 
+    
+    /*
+    [self GET:[NSString stringWithFormat:@"1.1/statuses/%@.json",source] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSArray *tweets = [Tweet tweetsWithArray:responseObject];
+        NSLog(@"tweets.count=%lu", (unsigned long)tweets.count);
+        NSLog(@"params=%@", params);
+        completion(tweets, nil);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Failed to get tweets with error %@", error);
+        completion(nil, error);
+    }];
+     */
+}
 
 - (void)doFavorite:(NSString *)tweetId completion:(void (^)(NSError *error))completion {
     [self POST:[NSString stringWithFormat:@"1.1/favorites/create.json?id=%@", tweetId]

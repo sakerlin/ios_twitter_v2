@@ -23,13 +23,13 @@
 @property (nonatomic, strong) UIActivityIndicatorView *loadMoreView;
 @property (nonatomic, assign) NSInteger lastTweetsCount;
 @property (nonatomic, assign) NSInteger initCount;
+@property (nonatomic, assign) NSString *source;
 @property (nonatomic, assign) BOOL isInfiniteLoading;
 @property (nonatomic, assign) BOOL isInitLoading;
 @property (nonatomic, assign) BOOL isPullDownRefreshing;
 @property (weak, nonatomic) IBOutlet UINavigationBar *tweetNav;
 
 @property (nonatomic, assign) BOOL isLoadingOnTheFly;
-@property (weak, nonatomic) IBOutlet UIButton *composeButton;
 
 @end
 
@@ -38,7 +38,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    self.source = @"home_timeline";
     [self getHomeTimeline:nil];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"TweetsCell" bundle:nil] forCellReuseIdentifier:@"TweetsCell"];
@@ -71,21 +71,28 @@
     self.isInitLoading = YES;
     self.isInfiniteLoading = NO;
     self.initCount = 12;
+    
+   // [self.tweetNav setTitle: @"Home"];
+    self.tweetNav.topItem.title = @"Home";
+    self.composeButton.tag = 1;
 }
 
-
-- (IBAction)onMenuButton:(id)sender {
+- (IBAction)onCompose:(id)sender {
+    //  ComposeViewController *Cvc = [[ComposeViewController alloc] init];
+    // [self presentViewController:Cvc animated:YES completion:nil];
     UIButton *button = sender;
-    NSLog(@"on menu button");
+    NSLog(@"on Compose button");
     NSLog(@"button.tag=%ld", (long)button.tag);
     switch (button.tag) {
         case 0: {
+            NSLog(@"movePanelToOriginalPosition cp");
             [_delegate movePanelToOriginalPosition:nil];
             break;
         }
             
         case 1: {
-            [_delegate movePanelRight];
+            NSLog(@"delegate movePanelLeft");
+            [_delegate movePanelLeft];
             break;
         }
             
@@ -94,6 +101,31 @@
     }
 }
 
+- (IBAction)onMenuButton:(id)sender {
+    UIButton *button = sender;
+    NSLog(@"on menu button");
+    NSLog(@"button.tag=%ld", (long)button.tag);
+    switch (button.tag) {
+        case 0: {
+            NSLog(@"movePanelToOriginalPosition");
+            [_delegate movePanelToOriginalPosition:nil];
+            break;
+        }
+            
+        case 1: {
+            NSLog(@"delegate movePanelRight");
+            [_delegate movePanelRight];
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
+- (void)cancelCompose{
+    [_delegate movePanelToOriginalPosition:nil];
+
+}
 - (void)selectMenuRow:(NSInteger *)row
 {
      [_delegate movePanelToOriginalPosition:row];
@@ -103,15 +135,27 @@
  
     User *user = [User currentUser];
     switch ((long)row) {
+        
         case 0:
+            self.tweetNav.topItem.title = @"Home";
+            self.source = @"home_timeline";
+            self.tweets = nil;
+            [self getHomeTimeline:nil];
+            break;
+        case 1:
             NSLog(@"go Profile");
             [self onProfile:nil user:user];
             break;
-        case 1:
-            NSLog(@"Home");
-            break;
         case 2:
             NSLog(@"Mentions");
+            self.tweetNav.topItem.title  = @"Mentions";
+            self.source = @"mentions_timeline";
+            self.tweets = nil;
+            [self getHomeTimeline:nil];
+            break;
+        case 3:
+            NSLog(@"Sign Out");
+            [User logout];
             break;
         default:
             break;
@@ -133,21 +177,21 @@
     
     if (finalParams == nil) {
         finalParams = [[NSMutableDictionary alloc] init];
-        [finalParams setObject:@(20) forKey:@"count"];
-    }
+        [finalParams setObject:@(10) forKey:@"count"];
+     }
+    NSLog(@"finalParams=%@", finalParams);
     [SVProgressHUD showWithStatus:@"Loading..." maskType:SVProgressHUDMaskTypeGradient];
-    [[TwitterClient sharedInstance] homeTimelineWithParams:finalParams completion:^(NSArray *tweets, NSError *error) {
+    [[TwitterClient sharedInstance] timelineWithParams:finalParams source:self.source completion:^(NSArray *tweets, NSError *error) {
         if (!error) {
             
             if (self.isInfiniteLoading) {
                 [self.tweets addObjectsFromArray:tweets];
-               
             } else {
                 self.tweets = [NSMutableArray arrayWithArray:tweets];
             }
             
             self.lastTweetsCount = tweets.count;
-             self.initCount = tweets.count;
+            self.initCount = tweets.count;
             [self.tableRefreshControl endRefreshing];
             if (!self.isInitLoading) {
                 //self.backgroundView.hidden = YES;
@@ -176,11 +220,6 @@
     }];
 }
 
-- (IBAction)onCompose:(id)sender {
-    ComposeViewController *Cvc = [[ComposeViewController alloc] init];
-    [self presentViewController:Cvc animated:YES completion:nil];
-
-}
 
 - (IBAction)onLogout:(id)sender {
     [User logout];
@@ -219,7 +258,9 @@
         NSInteger max_id = [cell.tweet.tweetId integerValue] - 1;
         [params setObject:@(max_id) forKey:@"max_id"];
         self.isInfiniteLoading = YES;
-        [self getHomeTimeline:params];
+        if(self.tweets.count >= 10) {
+            [self getHomeTimeline:params];
+        }
     }
     return cell;
 }

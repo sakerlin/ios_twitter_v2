@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "TwitterClient.h"
 #import "TweetsViewController.h"
+#import "MainViewController.h"
 @interface LoginViewController ()
 
 @end
@@ -20,7 +21,9 @@
         [[TwitterClient sharedInstance] loginWithCompletion:^(User *user, NSError *error) {
             NSLog(@"%@", user);
         if (user) {
-            [self presentViewController:[[TweetsViewController alloc] init] animated:YES completion:nil];
+           // [self presentViewController:[[TweetsViewController alloc] init] animated:YES completion:nil];
+            self.viewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
+            [self presentViewController:self.viewController animated:YES completion:nil];
         } else {
             UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Failed to login"
                                                                            message:[NSString stringWithFormat:@("%@"), error.localizedDescription]

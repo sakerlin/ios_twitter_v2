@@ -47,7 +47,8 @@
 
 - (IBAction)onCancel:(id)sender {
     [self.view endEditing:YES];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [_delegate cancelCompose];
+    //[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)onPost:(id)sender {

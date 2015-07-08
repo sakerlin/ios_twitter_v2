@@ -118,6 +118,7 @@
         self.tweetPhotoImageHeight.constant = 0.0;
     }
     [self.authorImageView setUserInteractionEnabled:YES];
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onProfileTap)];
     [tap setNumberOfTouchesRequired:1];
     [tap setNumberOfTapsRequired:1];
