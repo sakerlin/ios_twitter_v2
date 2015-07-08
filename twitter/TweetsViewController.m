@@ -16,7 +16,7 @@
 #import "PostDetailViewController.h"
 #import "ProfileViewController.h"
 
-@interface TweetsViewController ()<UITableViewDataSource, UITableViewDelegate,TweetCellDelegate>
+@interface TweetsViewController ()<UITableViewDataSource, UITableViewDelegate, TweetCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property(atomic, strong) NSMutableArray *tweets;
 @property (nonatomic, strong) UIRefreshControl *tableRefreshControl;
@@ -38,7 +38,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-  
+    
     [self getHomeTimeline:nil];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"TweetsCell" bundle:nil] forCellReuseIdentifier:@"TweetsCell"];
@@ -72,7 +72,53 @@
     self.isInfiniteLoading = NO;
     self.initCount = 12;
 }
-// Pull down support
+
+
+- (IBAction)onMenuButton:(id)sender {
+    UIButton *button = sender;
+    NSLog(@"on menu button");
+    NSLog(@"button.tag=%ld", (long)button.tag);
+    switch (button.tag) {
+        case 0: {
+            [_delegate movePanelToOriginalPosition:nil];
+            break;
+        }
+            
+        case 1: {
+            [_delegate movePanelRight];
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
+
+- (void)selectMenuRow:(NSInteger *)row
+{
+     [_delegate movePanelToOriginalPosition:row];
+}
+
+- (void)goMenuPage:(NSInteger *)row{
+ 
+    User *user = [User currentUser];
+    switch ((long)row) {
+        case 0:
+            NSLog(@"go Profile");
+            [self onProfile:nil user:user];
+            break;
+        case 1:
+            NSLog(@"Home");
+            break;
+        case 2:
+            NSLog(@"Mentions");
+            break;
+        default:
+            break;
+    }
+    
+}
+
 - (void)onLogoutButton {
    [User logout];
 }
@@ -148,12 +194,13 @@
     [self presentViewController:Cvc animated:YES completion:nil];
 }
 - (void)TweetsCell:(TweetsCell *)TweetsCell onProfileTap:(Tweet *)originlTweet {
-    [self onProfile:originlTweet];
+    [self onProfile:originlTweet user:originlTweet.user];
 }
 
-- (void)onProfile:(Tweet *)originalTweet {
+- (void)onProfile:(Tweet *)originalTweet user:(User *)user{
     ProfileViewController *Pvc = [[ProfileViewController alloc] init];
     Pvc.originalTweet = originalTweet;
+    Pvc.user = user;
     [self presentViewController:Pvc animated:YES completion:nil];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

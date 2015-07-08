@@ -12,6 +12,7 @@
 #import "User.h"
 #import "Tweet.h"
 #import "TweetsViewController.h"
+#import "MainViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -23,19 +24,17 @@
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLogout) name:UserDidLogoutNotification object:nil];
+    
     User *user = [User currentUser];
     if (user != nil) {
-        //ContainerViewController *cvc = [[ContainerViewController alloc] init];
-        //UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:cvc];
-        self.window.rootViewController = [[TweetsViewController alloc] init];
-        //NSLog(@"welcome %@", user.name);
+        self.viewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
+        self.window.rootViewController = self.viewController;
+        
+        //self.window.rootViewController = [[TweetsViewController alloc] init];
     } else {
-        //LoginViewController *lvc = [[LoginViewController alloc] init];
-        //self.window.rootViewController = lvc;
         self.window.rootViewController = [[LoginViewController alloc] init];
         NSLog(@"not login");
-
-    }
+   }
      
     [self.window makeKeyAndVisible];
     return YES;

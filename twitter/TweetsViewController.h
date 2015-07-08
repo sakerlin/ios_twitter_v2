@@ -7,7 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LeftMenuViewController.h"
+#import "MainViewController.h"
+@protocol TweetsViewControllerDelegate <NSObject>
+@optional
+- (void)movePanelLeft;
+- (void)movePanelRight;
 
-@interface TweetsViewController : UIViewController
+@required
+- (void)movePanelToOriginalPosition:(NSInteger *)row;
 
+@end
+
+@interface TweetsViewController : UIViewController<LeftMenuViewControllerDelegate, MainViewControllerDelegate>
+@property (weak, nonatomic) IBOutlet UIButton *menuButton;
+@property (nonatomic, assign) id<TweetsViewControllerDelegate> delegate;
+- (void)goMenuPage:(NSInteger *)row;
 @end

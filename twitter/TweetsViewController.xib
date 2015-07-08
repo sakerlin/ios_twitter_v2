@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TweetsViewController">
             <connections>
                 <outlet property="composeButton" destination="xqM-jW-bvM" id="Q7h-c9-dHA"/>
+                <outlet property="menuButton" destination="8or-rP-qFm" id="7Kj-hZ-XQm"/>
                 <outlet property="tableView" destination="f2e-Ut-zm6" id="nlj-6V-AYb"/>
                 <outlet property="tweetNav" destination="6LV-h6-bm7" id="f2r-dT-QNy"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -24,15 +25,15 @@
                     </constraints>
                     <items>
                         <navigationItem title="Twitter" id="aKg-HI-i8J">
-                            <barButtonItem key="leftBarButtonItem" id="bEZ-Cc-fck">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7rr-40-DK6" customClass="Tweets">
-                                    <rect key="frame" x="127" y="182" width="49" height="30"/>
+                            <barButtonItem key="leftBarButtonItem" style="plain" id="v5q-Js-eKB">
+                                <button key="customView" opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8or-rP-qFm">
+                                    <rect key="frame" x="16" y="17" width="25" height="25"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" title="Logout">
+                                    <state key="normal" image="menu">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="onLogout:" destination="-1" eventType="touchUpInside" id="HYU-VE-kTZ"/>
+                                        <action selector="onMenuButton:" destination="-1" eventType="touchUpInside" id="MsM-2S-AbB"/>
                                     </connections>
                                 </button>
                             </barButtonItem>
@@ -79,5 +80,6 @@
     </objects>
     <resources>
         <image name="compose" width="128" height="128"/>
+        <image name="menu" width="36" height="36"/>
     </resources>
 </document>

@@ -10,4 +10,5 @@
 #import "Tweet.h"
 @interface ProfileViewController : UIViewController
 @property (nonatomic, strong) Tweet *originalTweet;
+@property (nonatomic, strong) User *user;
 @end

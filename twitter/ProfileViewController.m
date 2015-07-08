@@ -27,16 +27,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    NSLog(@"color=%@",self.originalTweet.user.profile_background_color);
+    //NSLog(@"color=%@",self.originalTweet.user.profile_background_color);
     //NSString *colorhex = self.originalTweet.user.profile_background_color;
     UIColor *proFileColor = [UIColor colorWithHexString:@"89C9FA"];
     self.profileBannerView.backgroundColor = proFileColor;
-    self.userScrennNameLabel.text = [NSString stringWithFormat:@"@%@", self.originalTweet.user.screen_name];
-    self.userNameLabel.text = self.originalTweet.user.name;
-    self.userDescription.text = [NSString stringWithFormat:@"%@", self.originalTweet.user.userDescription];
-    [self.profileBanner setImageWithURL:[NSURL URLWithString:self.originalTweet.profileBannerImage]];
+    self.userScrennNameLabel.text = [NSString stringWithFormat:@"@%@", self.user.screen_name];
+    self.userNameLabel.text = self.user.name;
+    self.userDescription.text = [NSString stringWithFormat:@"%@", self.user.userDescription];
+    [self.profileBanner setImageWithURL:[NSURL URLWithString:self.user.profileBannerImage]];
+    
     self.profileBanner.clipsToBounds = YES;
-    [self.userProfileImage setImageWithURL:[NSURL URLWithString:self.originalTweet.user.profileImageUrl]];
+    [self.userProfileImage setImageWithURL:[NSURL URLWithString:self.user.profileImageUrl]];
     self.userProfileImage.layer.cornerRadius = 4;
     self.userProfileImage.clipsToBounds = YES;
     [self.userProfileImage.layer setBorderColor: [[UIColor whiteColor] CGColor]];
