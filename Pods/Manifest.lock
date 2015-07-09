@@ -26,6 +26,7 @@ PODS:
   - DateTools (1.6.1)
   - SVProgressHUD (1.1.3)
   - UIColor-Utilities (1.0.1)
+  - UIImage-Helpers (0.0.3)
 
 DEPENDENCIES:
   - AFNetworking
@@ -33,6 +34,7 @@ DEPENDENCIES:
   - DateTools
   - SVProgressHUD
   - UIColor-Utilities
+  - UIImage-Helpers
 
 SPEC CHECKSUMS:
   AFNetworking: 41d45d2c14219af0fa5addf3cfd433a002c13c9f
@@ -40,5 +42,6 @@ SPEC CHECKSUMS:
   DateTools: 9bcc89e4f2f9004d8a7a2bd1b49269cf78968e65
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
   UIColor-Utilities: 6746a54dcdb3bc012dd7aeaeea5588ae2100beb2
+  UIImage-Helpers: 06b04a42bdd222844035602e87e936765c80f620
 
 COCOAPODS: 0.37.2

@@ -5,3 +5,4 @@ pod 'AFNetworking'
 pod "BDBOAuth1Manager", '~> 1.4.0'
 pod "SVProgressHUD"
 pod 'UIColor-Utilities'
+pod 'UIImage-Helpers'

@@ -1,7 +1,7 @@
 
 ## Twitter Redux
 
-Time spent ''
+Time spent 25hr
 
 ### Requirements
 
@@ -12,9 +12,9 @@ Time spent ''
 - [x] Profile page
   - [x] Contains the user header view
   - [x] Contains a section with the users basic stats: # tweets, # following, # followers
-  - [ ] Optional: Implement the paging view for the user tweets and favorites.
+  - [ ] Optional: Implement the paging view for the user description.
   - [ ] Optional: As the paging view moves, increase the opacity of the background screen. See the actual Twitter app for this effect 
-  - [ ] Optional: Pulling down the profile page should blur and resize the header image.
+  - [x] Optional: Pulling down the profile page should blur and resize the header image.
 - [x] Home Timeline
   - [x] Tapping on a user image should bring up that user's profile page
 
@@ -27,5 +27,5 @@ Time spent ''
 
 ### Walkthrough
 
-![Video Walkthrough](Twitter_app_v2.gif)
+![Video Walkthrough](tweet_v2.gif)
 

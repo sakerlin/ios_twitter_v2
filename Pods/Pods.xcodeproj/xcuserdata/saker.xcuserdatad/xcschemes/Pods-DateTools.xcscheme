@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B72F616F8330EA8A99AB82FA"
+               BlueprintIdentifier = "2EF6EBE5A5300DC89F197758"
                BuildableName = "libPods-DateTools.a"
                BlueprintName = "Pods-DateTools"
                ReferencedContainer = "container:Pods.xcodeproj">

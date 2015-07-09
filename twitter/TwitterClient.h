@@ -20,4 +20,6 @@
 - (void)doRetweet:(NSString *)tweetId completion:(void (^)(NSError *error))completion;
 - (void)doUnRetweet:(NSString *)tweetId completion:(void (^)(NSError *error))completion;
 - (void)doTweet:(NSMutableDictionary *)params completion:(void (^)(NSError *error))completion;
+- (void)getFavorite:(NSDictionary *)params source:(NSString *)source completion:(void (^)(NSArray *tweets, NSError *error))completion;
+
 @end

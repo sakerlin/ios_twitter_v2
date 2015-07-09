@@ -72,3 +72,9 @@
 #define COCOAPODS_VERSION_MINOR_UIColor_Utilities 0
 #define COCOAPODS_VERSION_PATCH_UIColor_Utilities 1
 
+// UIImage-Helpers
+#define COCOAPODS_POD_AVAILABLE_UIImage_Helpers
+#define COCOAPODS_VERSION_MAJOR_UIImage_Helpers 0
+#define COCOAPODS_VERSION_MINOR_UIImage_Helpers 0
+#define COCOAPODS_VERSION_PATCH_UIImage_Helpers 3
+

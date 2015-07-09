@@ -39,6 +39,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.source = @"home_timeline";
+    //self.source = @"mentions_timeline";
     [self getHomeTimeline:nil];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"TweetsCell" bundle:nil] forCellReuseIdentifier:@"TweetsCell"];
@@ -86,7 +87,7 @@
     switch (button.tag) {
         case 0: {
             NSLog(@"movePanelToOriginalPosition cp");
-            [_delegate movePanelToOriginalPosition:nil];
+            [_delegate movePanelToOriginalPosition:(NSInteger *) -1];
             break;
         }
             
@@ -107,8 +108,8 @@
     NSLog(@"button.tag=%ld", (long)button.tag);
     switch (button.tag) {
         case 0: {
-            NSLog(@"movePanelToOriginalPosition");
-            [_delegate movePanelToOriginalPosition:nil];
+            
+            [_delegate movePanelToOriginalPosition:(NSInteger *) -1];
             break;
         }
             
@@ -123,7 +124,7 @@
     }
 }
 - (void)cancelCompose{
-    [_delegate movePanelToOriginalPosition:nil];
+    [_delegate movePanelToOriginalPosition:(NSInteger *) -1];
 
 }
 - (void)selectMenuRow:(NSInteger *)row
@@ -137,6 +138,7 @@
     switch ((long)row) {
         
         case 0:
+            NSLog(@"go home_timeline");
             self.tweetNav.topItem.title = @"Home";
             self.source = @"home_timeline";
             self.tweets = nil;
@@ -147,7 +149,7 @@
             [self onProfile:nil user:user];
             break;
         case 2:
-            NSLog(@"Mentions");
+            NSLog(@"go Mentions");
             self.tweetNav.topItem.title  = @"Mentions";
             self.source = @"mentions_timeline";
             self.tweets = nil;
@@ -177,7 +179,7 @@
     
     if (finalParams == nil) {
         finalParams = [[NSMutableDictionary alloc] init];
-        [finalParams setObject:@(10) forKey:@"count"];
+        [finalParams setObject:@(20) forKey:@"count"];
      }
     NSLog(@"finalParams=%@", finalParams);
     [SVProgressHUD showWithStatus:@"Loading..." maskType:SVProgressHUDMaskTypeGradient];
@@ -185,8 +187,10 @@
         if (!error) {
             
             if (self.isInfiniteLoading) {
+                NSLog(@"append tweets");
                 [self.tweets addObjectsFromArray:tweets];
             } else {
+                NSLog(@"renew tweets");
                 self.tweets = [NSMutableArray arrayWithArray:tweets];
             }
             
@@ -242,6 +246,7 @@
     Pvc.user = user;
     [self presentViewController:Pvc animated:YES completion:nil];
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.tweets.count;
 }
@@ -253,14 +258,14 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.delegate = self;
     // Infinite loading
-    if (indexPath.row == self.tweets.count - 1 && self.lastTweetsCount == self.initCount && !self.isLoadingOnTheFly) {
+    if (indexPath.row == self.tweets.count - 1 && self.lastTweetsCount == 20 && !self.isLoadingOnTheFly) {
+        NSLog(@"do Infinite loading");
         NSMutableDictionary *params = [NSMutableDictionary dictionary];
         NSInteger max_id = [cell.tweet.tweetId integerValue] - 1;
         [params setObject:@(max_id) forKey:@"max_id"];
         self.isInfiniteLoading = YES;
-        if(self.tweets.count >= 10) {
-            [self getHomeTimeline:params];
-        }
+        [self getHomeTimeline:params];
+        
     }
     return cell;
 }

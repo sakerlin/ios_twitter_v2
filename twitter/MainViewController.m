@@ -89,7 +89,7 @@
         }
         
         if (!_showPanel) {
-            [self movePanelToOriginalPosition:nil];
+            [self movePanelToOriginalPosition:(NSInteger *) -1];
         } else {
             if (_showingLeftPanel) {
                  [self movePanelRight];
@@ -229,16 +229,15 @@
 }
 
 -(void)movePanelToOriginalPosition:(NSInteger *)row {
-    NSLog(@"movePanelToOriginalPosition s" );
-    NSLog(@"row=%ld", row);
+    NSLog(@"fun: movePanelToOriginalPosition" );
+    
     [UIView animateWithDuration:SLIDE_TIMING delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         _centerViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     }
     completion:^(BOOL finished) {
         if (finished) {
             [self resetMainView];
-            
-            if(row >= 0 && row != nil){
+            if(row >= 0){
                 [_centerViewController goMenuPage:row];
             }
         }
@@ -246,6 +245,7 @@
 }
 
 -(void)resetMainView {
+    NSLog(@"do resetMainView");
     // remove left and right views, and reset variables, if needed
     if (_leftMenuViewController != nil) {
         [self.leftMenuViewController.view removeFromSuperview];
